@@ -1,0 +1,28 @@
+{
+  "name": "portfolio-starter-stephenasante21",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm run migrate && nodemon src/index.js --legacy-watch",
+    "migrate": "npx knex migrate:latest --cwd src",
+    "test": "echo\"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "axios": "^1.6.1",
+    "express": "^4.18.2",
+    "knex": "^3.0.1",
+    "nodemon": "^3.0.1",
+    "pg": "^8.11.3",
+    "uuid": "^9.0.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EHB-MCT/portfolio-starter-Stephenasante21"
+  }
+}
