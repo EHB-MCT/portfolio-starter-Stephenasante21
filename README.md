@@ -6,7 +6,7 @@ Code of conduct
 contribution guideline
 README
 # Porsche Car Inventory API
-
+## purpose 
 This project serves as the backend API for the Porsche Car Inventory System. It allows users to manage a collection of Porsche car models and their details. The API is developed using Node.js and Express and is designed to run within a Docker container alongside a PostgreSQL database.
 
 ## Features
@@ -33,6 +33,11 @@ To run this project, you will need:
 1. Clone the repository to your local machine:
 
 ```sh
-git clone https://github.com/your-username/your-repository-name.git
+git https://github.com/EHB-MCT/portfolio-starter-Stephenasante21
+```
 
-CHANGELOG
+## Status
+The project is currently in development
+
+## Questions and Support
+If you have any questions or need assistence, 
