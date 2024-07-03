@@ -1,16 +1,24 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-
-
-
+const carRoutes = require('./routes/carRoutes');
 const app = express();
 const port = 3000;
 
+app.use(bodyParser.json());
+app.use('/cars', carRoutes);
+
+app.listen(port, () => {
+    console.log(`Server is running on http://localhost:${port}`);
+});
+
+
+
+/* EERSTE SEMESTER 
 // Use body-parser middleware to parse JSON requests
 app.use(bodyParser.json());
 
 // In-memory array to store Porsche cars
-let porscheCars = [
+//let porscheCars = [
     { id: 1, model: '911 Carrera', year: 2022 },
     { id: 2, model: 'Cayenne', year: 2022 },
     { id: 3, model: 'Taycan', year: 2019 },
@@ -54,4 +62,4 @@ app.post('/cars', (req, res) => {
 // Start the server
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
-});
+});*/

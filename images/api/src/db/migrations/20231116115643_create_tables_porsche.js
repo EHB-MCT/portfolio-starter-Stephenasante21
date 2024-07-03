@@ -1,23 +1,53 @@
-// migrations/20231108120000_create_tables_porsche.js
+// db/migrations/20231116115643_create_tables_porsche.js
 exports.up = function (knex) {
     return knex.schema
-        .createTable("porsche_models", function (table) {
+        .createTable("users", function (table) {
             table.increments("id").primary();
-            table.string("model");
-            table.integer("year");
+            table.string("username").notNullable().unique();
+            table.string("email").notNullable().unique();
+            table.string("password").notNullable();
+            table.timestamps(true, true);
         })
-        .createTable("porsche_cars", function (table) {
+        .createTable("car_models", function (table) {
             table.increments("id").primary();
-            table.string("name");
-            table.integer("model_id").unsigned();
-            table
-                .foreign("model_id")
-                .references("id")
-                .inTable("porsche_models")
-                .onDelete("SET NULL");
+            table.string("model").notNullable();
+            table.integer("year").notNullable();
+            table.timestamps(true, true);
+        })
+        .createTable("cars", function (table) {
+            table.increments("id").primary();
+            table.string("name").notNullable();
+            table.integer("model_id").unsigned().notNullable();
+            table.integer("user_id").unsigned().notNullable();
+            table.foreign("model_id").references("id").inTable("car_models").onDelete("CASCADE");
+            table.foreign("user_id").references("id").inTable("users").onDelete("CASCADE");
+            table.timestamps(true, true);
+        })
+        .createTable("maintenance_logs", function (table) {
+            table.increments("id").primary();
+            table.integer("car_id").unsigned().notNullable();
+            table.string("description").notNullable();
+            table.date("date").notNullable();
+            table.decimal("cost", 10, 2).notNullable();
+            table.foreign("car_id").references("id").inTable("cars").onDelete("CASCADE");
+            table.timestamps(true, true);
+        })
+        .createTable("reminders", function (table) {
+            table.increments("id").primary();
+            table.integer("car_id").unsigned().notNullable();
+            table.string("description").notNullable();
+            table.date("reminder_date").notNullable();
+            table.boolean("completed").defaultTo(false);
+            table.foreign("car_id").references("id").inTable("cars").onDelete("CASCADE");
+            table.timestamps(true, true);
         });
 };
 
 exports.down = function (knex) {
-    return knex.schema.dropTable("porsche_cars").dropTable("porsche_models");
+    return knex.schema
+        .dropTable("reminders")
+        .dropTable("maintenance_logs")
+        .dropTable("cars")
+        .dropTable("car_models")
+        .dropTable("users");
 };
